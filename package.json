@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mehj/frontend.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/mehj/frontend/issues"
+  },
+  "dependencies": {
+    "dnode": "~1.0.5",
+    "coden": "git://github.com/amazo/coden",
+    "qry": "0.0.1"
+  }
+}
