@@ -1,5 +1,4 @@
 {createServer} = require 'http'
-https = require 'https'
 net = require 'net'
 dnode = require 'dnode'
 {Router} = require './router'
@@ -41,7 +40,7 @@ httpServer = createServer httpHandler
     
 httpServer.listen 8080
 
-httpsServer = https.createServer (req, res) ->
+httpsServer = createServer (req, res) ->
     req.headers['x-forwarded-proto'] = 'https'
     httpHandler req, res
     
