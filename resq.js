@@ -5,32 +5,22 @@
   parse = require('url').parse;
 
   exports.Request = function(req) {
-    var headers, httpVersion, method, proto, request, uri, url;
-    proto = 'HTTP';
+    var headers, httpVersion, method, proto, uri, url;
+    proto = 'http';
     if (req.headers['x-forwarded-proto'] != null) {
       proto = req.headers['x-forwarded-proto'];
     }
+    proto = proto.toLowerCase();
     uri = parse(proto + '://' + req.headers.host + req.url, true);
     uri.protocol = proto;
     method = req.method, headers = req.headers, url = req.url, httpVersion = req.httpVersion;
-    request = {
+    return {
       method: method,
       headers: headers,
       url: url,
       uri: uri,
       httpVersion: httpVersion
     };
-    request.onData = function(handler) {
-      return req.on('data', function(data) {
-        return handler(data);
-      });
-    };
-    request.onEnd = function(handler) {
-      return req.on('end', function() {
-        return handler();
-      });
-    };
-    return request;
   };
 
   exports.Response = function(res) {

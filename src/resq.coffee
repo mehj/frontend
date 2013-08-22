@@ -1,19 +1,13 @@
 {parse} = require 'url'
 
 exports.Request = (req) ->
-    proto = 'HTTP'
+    proto = 'http'
     proto = req.headers['x-forwarded-proto'] if req.headers['x-forwarded-proto']?
+    proto = proto.toLowerCase()
     uri = parse (proto + '://' + req.headers.host + req.url), true
     uri.protocol = proto
     {method, headers, url, httpVersion} = req
-    request = {method, headers, url, uri, httpVersion}
-    request.onData = (handler) ->
-        req.on 'data', (data) ->
-            handler data
-    request.onEnd = (handler) ->
-        req.on 'end', ->
-            handler()
-    request
+    {method, headers, url, uri, httpVersion}
 
 
 exports.Response = (res) ->
